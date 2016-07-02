@@ -1,0 +1,91 @@
+@import 'juice';
+$browser-prefixes: true !default;
+html{
+	background-color:#F7F7F7;
+}
+h1{
+	text-align:center;
+	font-size:2em;
+	font-weight:bolder;
+	border:.2em solid black;
+	border-style:solid none;
+	margin:.5em 0;
+	padding:.2em;
+	a{
+		text-decoration: none;
+	}
+}
+body{
+	margin:0;
+}
+div.board{
+	display:table;
+	margin:auto;
+	margin-bottom:.5em;
+	.cell{
+		width:.7em;
+		height:.7em;
+		display: block;
+		float:left;
+		border:.5px solid hsla(0,0%,0%,0.2);
+	}
+	.dead{
+		@extend .cell;
+		background-color:transparent;
+	}
+	.live{
+		@extend .cell;
+		background-color:#8BC34A;
+	}
+}
+.clear{
+	display:inline-block;
+	clear:both;
+}
+div.control{
+	clear:both;
+	display:table;
+	margin:auto;
+	margin-top:.5em;
+	margin-bottom:.5em;
+	vertical-align:middle;
+}
+button{
+	padding:.5em;
+	background-color:transparent;
+	outline:none;
+	border:.1em solid black;
+	border-radius:1em;
+	margin-right:1em;
+	font-size:1.1em;
+	color:black;
+	font-family:sans-serif;
+	cursor:pointer;
+}
+input[type="number"]{
+	font-family:sans-serif;
+	font-size:1.1em;
+	font-weight:bold;
+	text-align:center;
+	padding:.25em;
+	line-height:1.35em;
+	margin-right:1em;
+}
+input[type="range"]{
+	width:100%;
+	color:green;
+}
+.gen{
+	font-size:1.1em;
+	font-weight:bold;
+	font-family:sans-serif;
+	color:#BC4E4E;
+	width:10em;
+	padding:.1em;
+	margin-button:.3em auto;
+	line-height:1.3em;
+	@include center-block;
+	border:.5em solid #F7F7F7;
+	border-radius:.5em;
+	text-align:center;
+}
