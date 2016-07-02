@@ -2,13 +2,6 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import '../style/style.scss'
 var BoardBuilder = React.createClass({
-	getInitialState() {
-	    return {
-	        isModified:false,
-	        isStarted:this.props.Start,
-	        cellsM:[],
-	    };
-	},
 	setActive:function(i){
 		var refID = this.refs['item'+i];
 		if(refID.classList.contains('live')){
@@ -24,7 +17,7 @@ var BoardBuilder = React.createClass({
 		var width = this.props.width;
 		var height = this.props.height;
 		var cells = [];
-		console.log('is set = ',this.props.SetC);
+		// console.log('is set = ',this.props.SetC);
 		if(this.props.SetC){
 			for (var i=1;i<=(width*height);i++){
 				var click=this.setActive.bind(this,i);
@@ -55,9 +48,8 @@ var BoardBuilder = React.createClass({
 		} else {
 		if(this.props.Step){
 			for(var i=1;i<=width*height;i++){
-				var click=this.setActive.bind(this,i);
+				// var click=this.setActive.bind(this,i);
 				var classAdd;
-				var classM;
 				var i = Number(i);
 				var width = Number(width);
 				var height = Number(height);
@@ -167,7 +159,7 @@ var BoardBuilder = React.createClass({
 					}
 				}
 				cells.push(
-					<div className={classAdd} ref={'item'+i} onClick={click}></div>
+					<div className={classAdd} ref={'item'+i}></div>
 				);
 			}
 		} else {
@@ -241,7 +233,6 @@ var GameOfLife = React.createClass({
 		this.setState({
 			speed:this.refs.speed.value,
 			isRandom:false,
-			step:false,
 			isSet:false,
 		});
 		clearInterval(this.interval);
@@ -283,14 +274,12 @@ var GameOfLife = React.createClass({
 	},
 	start:function(){
 		clearInterval(this.interval);
+		this.setState({isSet:true});
 		this.interval = setInterval(this.step,-this.state.speed);
 	},
 	pause:function(){
 		clearInterval(this.interval);
 		this.setState({isSet:false});
-	},
-	setCell:function(){
-		this.setState({isSet:true});
 	},
 	render:function(){
 		return (
@@ -302,10 +291,8 @@ var GameOfLife = React.createClass({
 					<button onClick={this.start}>Start</button>
 					<button onClick={this.stop}>Stop</button>
 					<button onClick={this.clear}>Clear</button>
-					<button onClick={this.step}>Step</button>
 					<button onClick={this.pause}>Pause</button>
 					<button onClick={this.random}>Random</button>
-					<button onClick={this.setCell}>Set Cell</button>
 				</div>
 				<div className='control'>
 					<input type="number" min='10' max='100' ref='width' value={this.state.width} onChange={this.changeSize}/>
